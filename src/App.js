@@ -1,11 +1,13 @@
 import './App.css';
-import WithSubnavigation from './Components/NavBar';
+import LargeWithLogoCentered from './Components/Footer';
+import WithSubnavigation from './Components/NabBar';
+
 
 function App() {
   return (
     <div >
       <WithSubnavigation/>
-      
+      <LargeWithLogoCentered/>
     </div>
   );
 }
