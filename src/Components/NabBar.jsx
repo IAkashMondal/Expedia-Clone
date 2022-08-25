@@ -1,8 +1,20 @@
 import {Box,Flex,Text,IconButton,Button,Stack,Collapse,Icon,Link,Popover,PopoverTrigger,PopoverContent,useColorModeValue,
-    useDisclosure,
-    Image,
-  } from '@chakra-ui/react';
-  import {Search2Icon, CloseIcon,ChevronDownIcon,ChevronRightIcon,} from '@chakra-ui/icons';
+    useDisclosure,Image, extendTheme } from '@chakra-ui/react';
+import {  VscCombine } from "react-icons/vsc";
+import {RiHotelFill, RiShipFill } from "react-icons/ri";
+import { IoCarSportSharp, IoSearch, IoTicketSharp } from "react-icons/io5";
+import { MdOutlineFlight } from "react-icons/md";
+import {ChevronRightIcon,} from '@chakra-ui/icons';
+import { NavLink } from 'react-router-dom';
+  // const theme = extendTheme({
+  //   colors: {
+  //     brand: {
+  //       100: "#f7fafc",
+  //       // ...
+  //       900: "#1a202c",
+  //     },
+  //   },
+  // })
   
   export default function WithSubnavigation() {
     const { isOpen, onToggle } = useDisclosure();
@@ -19,19 +31,6 @@ import {Box,Flex,Text,IconButton,Button,Stack,Collapse,Icon,Link,Popover,Popover
           borderStyle={'solid'}
           borderColor={useColorModeValue('gray.200', 'gray.900')}
           align={'center'}>
-          <Flex
-            flex={{ base: 1, md: 'auto' }}
-            ml={{ base: -2 }}
-            display={{ base: 'flex', md: 'none' }}>
-            <IconButton
-              onClick={onToggle}
-              icon={
-                isOpen ? <CloseIcon w={3} h={3} /> : <Search2Icon w={5} h={5} />
-              }
-              variant={'ghost'}
-              aria-label={'Toggle Navigation'}
-            />
-          </Flex>
           <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
             <Box>
             <Image
@@ -41,7 +40,20 @@ import {Box,Flex,Text,IconButton,Button,Stack,Collapse,Icon,Link,Popover,Popover
                   alt={"LOGO"}
                 />
             </Box>
-  
+            <Flex
+            flex={{ base: 1, md: 'auto' }}
+            ml={{ base: -2 }}
+            display={{ base: 'flex', md: 'none' }}>
+            <IconButton
+              onClick={onToggle}
+              _focus={{ bg: 'none' }}
+              icon={
+                isOpen ? <IoSearch  /> : <IoSearch/>
+              }
+              variant={'ghost'}
+              aria-label={'Toggle Navigation'}
+            />
+          </Flex>
             <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
               <DesktopNav />
             </Flex>
@@ -59,18 +71,6 @@ import {Box,Flex,Text,IconButton,Button,Stack,Collapse,Icon,Link,Popover,Popover
               variant={'link'}
               href={'#'}>
               Sign In
-            </Button>
-            <Button
-              display={{ base: 'none', md: 'inline-flex' }}
-              fontSize={'sm'}
-              fontWeight={600}
-              color={'white'}
-              bg={'pink.400'}
-              href={'#'}
-              _hover={{
-                bg: 'pink.300',
-              }}>
-              Sign Up
             </Button>
           </Stack>
         </Flex>
@@ -90,12 +90,11 @@ import {Box,Flex,Text,IconButton,Button,Stack,Collapse,Icon,Link,Popover,Popover
     return (
       <Stack direction={'row'} spacing={4}>
         {NAV_ITEMS.map((navItem) => (
-          <Box key={navItem.label}>
+          <Box key={navItem.id}>
             <Popover trigger={'hover'} placement={'bottom-start'}>
               <PopoverTrigger>
                 <Link
                   p={2}
-                  href={navItem.href ?? '#'}
                   fontSize={'sm'}
                   fontWeight={500}
                   color={linkColor}
@@ -117,7 +116,7 @@ import {Box,Flex,Text,IconButton,Button,Stack,Collapse,Icon,Link,Popover,Popover
                   minW={'sm'}>
                   <Stack>
                     {navItem.children.map((child) => (
-                      <DesktopSubNav key={child.label} {...child} />
+                      <DesktopSubNav key={child.titel} {...child} />
                     ))}
                   </Stack>
                 </PopoverContent>
@@ -129,37 +128,36 @@ import {Box,Flex,Text,IconButton,Button,Stack,Collapse,Icon,Link,Popover,Popover
     );
   };
   
-  const DesktopSubNav = ({ label, href, subLabel }) => {
+  const DesktopSubNav = ({titel,icon }) => {
     return (
       <Link
-        href={href}
-        role={'group'}
-        display={'block'}
-        p={2}
-        rounded={'md'}
-        _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
-        <Stack direction={'row'} align={'center'}>
-          <Box>
-            <Text
-              transition={'all .3s ease'}
-              _groupHover={{ color: 'pink.400' }}
-              fontWeight={500}>
-              {label}
-            </Text>
-            <Text fontSize={'sm'}>{subLabel}</Text>
-          </Box>
-          <Flex
+      role={'group'}
+      display={'block'}
+      p={2}
+      rounded={'md'}
+      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
+      <Stack direction={'row'} align={'center'}>
+        <Flex alignItems='center' gap='2'>
+          <Text
             transition={'all .3s ease'}
-            transform={'translateX(-10px)'}
-            opacity={0}
-            _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
-            justify={'flex-end'}
-            align={'center'}
-            flex={1}>
-            <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
-          </Flex>
-        </Stack>
-      </Link>
+            _groupHover={{ color: 'pink.400' }}
+            fontWeight={500}>
+          </Text>
+          {/* <Box>{icon}</Box> */}
+          <Text fontSize={'sm'}>{titel}</Text>
+        </Flex>
+        <Flex
+          transition={'all .3s ease'}
+          transform={'translateX(-10px)'}
+          opacity={0}
+          _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
+          justify={'flex-end'}
+          align={'center'}
+          flex={1}>
+          <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
+        </Flex>
+      </Stack>
+    </Link>
     );
   };
   
@@ -176,37 +174,9 @@ import {Box,Flex,Text,IconButton,Button,Stack,Collapse,Icon,Link,Popover,Popover
     );
   };
   
-  const MobileNavItem = ({ label, children, href }) => {
-    const { isOpen, onToggle } = useDisclosure();
-  
+  const MobileNavItem = ({children}) => {
     return (
-      <Stack spacing={4} onClick={children && onToggle}>
-        <Flex
-          py={2}
-          as={Link}
-          href={href ?? '#'}
-          justify={'space-between'}
-          align={'center'}
-          _hover={{
-            textDecoration: 'none',
-          }}>
-          <Text
-            fontWeight={600}
-            color={useColorModeValue('gray.600', 'gray.200')}>
-            {label}
-          </Text>
-          {children && (
-            <Icon
-              as={ChevronDownIcon}
-              transition={'all .25s ease-in-out'}
-              transform={isOpen ? 'rotate(180deg)' : ''}
-              w={6}
-              h={6}
-            />
-          )}
-        </Flex>
-  
-        <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
+      <Stack spacing={4} onClick={children }>
           <Stack
             mt={2}
             pl={4}
@@ -216,54 +186,61 @@ import {Box,Flex,Text,IconButton,Button,Stack,Collapse,Icon,Link,Popover,Popover
             align={'start'}>
             {children &&
               children.map((child) => (
-                <Link key={child.label} py={2} href={child.href}>
-                  {child.label}
-                </Link>
+                <NavLink key={child.titel} py={2} to={child.to}><Stack><Text>
+                  {/* {child.icon} */}
+                {child.titel}</Text></Stack></NavLink>
               ))}
           </Stack>
-        </Collapse>
       </Stack>
     );
   };
   
   
-  const NAV_ITEMS = [
+  export const NAV_ITEMS = [
     {
-      label: 'Inspiration',
+      label: 'More Travels',
+      id:"l1",
       children: [
         {
-          label: 'Explore Design Work',
-          subLabel: 'Trending Design to inspire you',
-          href: '#',
-        },
-        {
-          label: 'New & Noteworthy',
-          subLabel: 'Up-and-coming Designers',
-          href: '#',
-        },
-      ],
-    },
-    {
-      label: 'Find Work',
-      children: [
-        {
-          label: 'Job Board',
-          subLabel: 'Find your dream design job',
-          href: '#',
-        },
-        {
-          label: 'Freelance Projects',
-          subLabel: 'An exclusive list for contract work',
-          href: '#',
-        },
-      ],
-    },
-    {
-      label: 'Learn Design',
-      href: '#',
-    },
-    {
-      label: 'Hire Designers',
-      href: '#',
-    },
-  ];
+          titel:"Stays",
+          to:"/stays",
+          icon:<RiHotelFill/>
+      },
+      {
+          titel:"Flights",
+          to:"/flights",
+          icon:<MdOutlineFlight/>
+  
+      },
+      {
+          titel:"Cars",
+          to:"/cars",
+          icon:<IoCarSportSharp/>
+      },
+      {
+          titel:"Packages",
+          to:"/pacakages",
+          icon:<VscCombine/>
+      },
+      {
+          titel:"Things to do",
+          to:"/things-to-do",
+          icon:<IoTicketSharp/>
+      },
+      {
+          titel:"Cruies",
+          to:"/cruises",
+          icon:<RiShipFill/>
+      },
+      {
+          titel:"Deals",
+          to:"/deals",
+          icon:""
+      },
+      {
+          titel:"Group & meetings",
+          to:"/Group-meetings",
+          icon:""
+      }
+    ]}];
+    console.log(NAV_ITEMS )
