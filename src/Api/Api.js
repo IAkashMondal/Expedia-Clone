@@ -83,3 +83,36 @@ export const ExploreApi =[
                 titel:"vrbo terms and conditions",
                 to:"/"
             }]
+export const MobileNavItemApi=[
+    {
+        titel:"Stays",
+        to:"/stays",
+        icon:"<RiHotelFill/>"
+    },
+    {
+        titel:"Flights",
+        to:"/flights",
+        icon:"MdOutlineFlight"
+
+    },
+    {
+        titel:"Cars",
+        to:"/cars",
+        icon:"IoCarSportSharp"
+    },
+    {
+        titel:"Packages",
+        to:"/pacakages",
+        icon:"VscCombine"
+    },
+    {
+        titel:"Things to do",
+        to:"/things-to-do",
+        icon:"IoTicketSharp"
+    },
+    {
+        titel:"Cruies",
+        to:"/cruises",
+        icon:"RiShipFill"
+    }
+]
