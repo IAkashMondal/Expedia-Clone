@@ -10,7 +10,7 @@ import { ExploreApi,HelpApi,PolicyApi,CompanyApi } from '../Api/Api';
     );
   };
   
-  export default function LargeWithLogoCentered() {
+  export default function Footer() {
     return (
       <Box
         bg={useColorModeValue('gray.50', 'gray.900')}
