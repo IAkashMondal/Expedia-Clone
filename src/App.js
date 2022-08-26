@@ -1,16 +1,10 @@
 import './App.css';
-import LargeWithLogoCentered from './Components/Footer';
-import WithSubnavigation from './Components/NabBar';
-import Search from './Components/Search';
-
-
+import AllRoutes from './Routes/AllRoutes';
 function App() {
   return (
-    <div >
-      <WithSubnavigation/>
-      <Search/>
-      <LargeWithLogoCentered/>
-    </div>
+    <>
+    <AllRoutes/>
+    </>
   );
 }
 
