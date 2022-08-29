@@ -9,7 +9,6 @@ import {
   Link,
   Drawer,
   DrawerContent,
-  Text,Wrap,
   useDisclosure,
   Spacer,
   SimpleGrid,
@@ -17,7 +16,15 @@ import {
   Image,
   Button,
   WrapItem,
-  useToast,
+  Input,
+  Text,
+  Divider,
+  Checkbox,
+  RangeSliderTrack,
+  RangeSliderFilledTrack,
+  RangeSliderThumb,
+  VStack,
+  RangeSlider,
 } from '@chakra-ui/react';
 import {
   FiHome,
@@ -78,7 +85,6 @@ export default function ProductPage({ children }) {
       <Box ml={{ base: 0, md: 60 }} p="4">
         {children}
       </Box>
-      <h1>home</h1>
     </Box>
     <Footer/>
     </>
@@ -86,7 +92,15 @@ export default function ProductPage({ children }) {
 }
 
 
-const SidebarContent = ({ onClose, ...rest }) => {
+const SidebarContent = ({ data,onClose, ...rest }) => {
+    let [x,setX]=React.useState(0)
+    let[newarr,setNewarr]=useState([])
+    let  handlesortstar=(val)=>{
+        setX(val)
+        let newarr=data.filter((el)=>(el.ratings>val))
+         setNewarr(newarr)
+      }
+      console.log(data,"datsss")
   return (
     <Box
       bg={useColorModeValue('white', 'gray.900')}
@@ -100,11 +114,38 @@ const SidebarContent = ({ onClose, ...rest }) => {
       <NavLink to={"/"}><ArrowBackIcon w={20} h={50}/></NavLink>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
-      {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
-          {link.name}
-        </NavItem>
-      ))}
+     <Box>
+        <Box p={2}>
+            <Text>Search by name</Text>
+            <Input placeholder='Seacrch here'/>
+        </Box>
+        <Divider/>
+        <Box p={2}> 
+            <Text>Rating</Text>
+            <VStack display={'flex'} align={"flex-start"}>
+            <Checkbox >5 star</Checkbox>
+            <Checkbox ><>4 star</></Checkbox>
+            <Button onClick={()=>handlesortstar()} >3 star</Button>
+            <Checkbox onClick={()=>handlesortstar(2)} > 2 star</Checkbox>
+            <Checkbox  onClick={()=>handlesortstar(1)} >1 star</Checkbox>
+            </VStack>
+        </Box >
+        <Divider/>
+        <Box p={2}> 
+            <Text>Filter By</Text>
+            <>Popular filters</>
+            <VStack display={'flex'} align={"flex-start"}>
+            <Checkbox >Hot Tub</Checkbox>
+            <Checkbox >Spa</Checkbox>
+            <Checkbox >Free airport shuttle</Checkbox>
+            <Checkbox > Bank of American Stadium</Checkbox>
+            <Checkbox >Hotel resort</Checkbox>
+            </VStack>
+        </Box >
+        <Divider/>
+        <Box>
+        </Box>
+     </Box>
     </Box>
   );
 };
@@ -176,9 +217,7 @@ useEffect(()=>{
 fetch(`http://localhost:8080/Hotels`)
 .then((res)=> res.json())
 .then((res)=>setData(res))
-},[])
-
-  
+},[data])
     return (
         <>
         {
