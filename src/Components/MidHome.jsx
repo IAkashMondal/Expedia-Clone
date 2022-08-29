@@ -15,6 +15,7 @@ import {
     Input,
     Progress,
     SimpleGrid,
+    Stat,
   } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -123,6 +124,7 @@ import { useNavigate } from 'react-router-dom';
       </Flex>
       </Center>
       </>
+      
     );
   }
 

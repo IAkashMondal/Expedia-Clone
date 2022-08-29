@@ -9,12 +9,15 @@ import {
   Link,
   Drawer,
   DrawerContent,
-  Text,
+  Text,Wrap,
   useDisclosure,
   Spacer,
   SimpleGrid,
   Badge,
   Image,
+  Button,
+  WrapItem,
+  useToast,
 } from '@chakra-ui/react';
 import {
   FiHome,
@@ -26,8 +29,10 @@ import {
 } from 'react-icons/fi';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { ArrowBackIcon, StarIcon } from '@chakra-ui/icons';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 
 const LinkItems = [
@@ -161,36 +166,33 @@ const MobileNav = ({ onOpen, ...rest }) => {
 
 
 const DisplayData=()=> {
-    const property = {
-      imageUrl: 'https://bit.ly/2Z4KKcF',
-      imageAlt: 'Rear view of modern home with pool',
-      beds: 3,
-      baths: 2,
-      title: 'Modern home in city center in the heart of historic Los Angeles',
-      formattedPrice: '$1,900.00',
-      reviewCount: 34,
-      rating: 4,
+    const navigate=useNavigate();
+    const handelBook=()=>{
+        alert("Hottle Booked Sucessfull"+"\n"+ `Oder Toekn :${Date.now()}`);
+        navigate("/")
     }
+const[data,setData]=useState([])
+useEffect(()=>{
+fetch(`http://localhost:8080/Hotels`)
+.then((res)=> res.json())
+.then((res)=>setData(res))
+},[])
+
   
     return (
-      <Box maxW='lg' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-        <Image src={property.imageUrl} alt={property.imageAlt} />
+        <>
+        {
+            data.map((property)=>
+                <Box maxW='lg' key={property.id} borderWidth='1px' borderRadius='lg' overflow='hidden'>
+                    <SimpleGrid columns={2} spacing={10} >
+                        <Flex>
+        <Image src={property.img} alt={property.title} />
   
         <Box p='6'>
           <Box display='flex' alignItems='baseline'>
             <Badge borderRadius='full' px='2' colorScheme='teal'>
               New
             </Badge>
-            <Box
-              color='gray.500'
-              fontWeight='semibold'
-              letterSpacing='wide'
-              fontSize='xs'
-              textTransform='uppercase'
-              ml='2'
-            >
-              {property.beds} beds &bull; {property.baths} baths
-            </Box>
           </Box>
   
           <Box
@@ -202,11 +204,44 @@ const DisplayData=()=> {
           >
             {property.title}
           </Box>
+          <Box
+            mt='1'
+            fontWeight='semibold'
+            as='h4'
+            lineHeight='tight'
+            noOfLines={1}
+          >
+            Usa
+          </Box>
+          <Box
+            mt='1'
+            fontWeight='semibold'
+            as='h3'
+            lineHeight='tight'
+            noOfLines={1}
+          >
+            {property.descrition}
+          </Box>
+          <Box
+            mt='1'
+            fontWeight='semibold'
+            as='h1'
+            lineHeight='tight'
+            noOfLines={1}
+          >
+            {property.Features}
+          </Box>
   
           <Box>
-            {property.formattedPrice}
+           Today's Price ${property.Price}
             <Box as='span' color='gray.600' fontSize='sm'>
-              / wk
+              / day
+            </Box>
+          </Box>
+          <Box>
+           Regular Price: ${property.offerPrice}
+            <Box as='span' color='gray.600' fontSize='sm'>
+              / day
             </Box>
           </Box>
   
@@ -216,14 +251,20 @@ const DisplayData=()=> {
               .map((_, i) => (
                 <StarIcon
                   key={i}
-                  color={i < property.rating ? 'teal.500' : 'gray.300'}
+                  color={i < property.ratings ? 'teal.500' : 'gray.300'}
                 />
               ))}
             <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-              {property.reviewCount} reviews
+              {property.reviews}
             </Box>
           </Box>
+          <Button onClick={handelBook} colorScheme='linkedin'>Book</Button>
         </Box>
+        </Flex>
+        </SimpleGrid>
       </Box>
+            )
+        }
+        </>
     )
   }

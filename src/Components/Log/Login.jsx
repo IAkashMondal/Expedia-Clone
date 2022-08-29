@@ -1,7 +1,8 @@
 import {Flex, Box,FormControl,FormLabel, Input,InputGroup,InputRightElement,Stack,Button,Heading,Text,useColorModeValue,Link, Checkbox, } from '@chakra-ui/react';
 import { useState } from 'react';
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { ArrowBackIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { LoginEmail } from './Signup';
+import { NavLink } from 'react-router-dom';
   
   export default function Login() {
     const [showPassword, setShowPassword] = useState(false); 
@@ -13,9 +14,12 @@ import { LoginEmail } from './Signup';
         bg={useColorModeValue('gray.50', 'gray.800')}>
         <Stack spacing={8} mx={'auto'} maxW={'xl'} py={1} px={2}>
           <Stack align={'center'}>
+          <Flex align={"center"}  justify={"space-evenly"}>
+            <NavLink to={"/"}><ArrowBackIcon w={20} h={50}/></NavLink>
             <Heading fontSize={'4xl'} textAlign={'center'}>
             Sign in
             </Heading>
+            </Flex>
           </Stack>
           <Box
             rounded={'lg'}
