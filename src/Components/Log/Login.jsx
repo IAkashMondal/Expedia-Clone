@@ -1,34 +1,15 @@
-import {
-    Flex,
-    Box,
-    FormControl,
-    FormLabel,
-    Input,
-    InputGroup,
-    HStack,
-    InputRightElement,
-    Stack,
-    Button,
-    Heading,
-    Text,
-    useColorModeValue,
-    Link,
-    Checkbox,
-    IconButton,
-  } from '@chakra-ui/react';
-  import { useState } from 'react';
-  import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-  import { BsGithub, BsDiscord, BsPerson, BsGoogle, BsApple } from 'react-icons/bs';
-  import { MdFacebook } from 'react-icons/md';
+import {Flex, Box,FormControl,FormLabel, Input,InputGroup,InputRightElement,Stack,Button,Heading,Text,useColorModeValue,Link, Checkbox, } from '@chakra-ui/react';
+import { useState } from 'react';
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { LoginEmail } from './Signup';
   
-  export default function Signup() {
-    const [showPassword, setShowPassword] = useState(false);
-  
+  export default function Login() {
+    const [showPassword, setShowPassword] = useState(false); 
     return (
       <Flex
         minH={'1rem'}
         align={'center'}
-        justify={'center'}
+        justify={'center'} pb={40}
         bg={useColorModeValue('gray.50', 'gray.800')}>
         <Stack spacing={8} mx={'auto'} maxW={'xl'} py={1} px={2}>
           <Stack align={'center'}>
@@ -84,49 +65,15 @@ import {
                   Sign in
                 </Button>
               </Stack>
-              <Stack pt={6}>
+              <LoginEmail/>
+              <Stack pt={-3}>
                 <Text align={'center'}>
                 Don't have an account? <Link color={'blue.400'}>Create one</Link>
                 </Text>
-                <Text>or continue with
+                <Text align={'center'}><Link color={'blue.400'}>Forget Password?</Link>  or continue with
                 </Text>
               </Stack>
             </Stack>
-            
-  
-  
-                <Box  >
-                  <Flex  align={'center'}
-                      justify={'center'}>
-            <HStack
-                      mt={{ lg: 10, md: 10 }}
-                      spacing={2}
-                      px={5}
-                      alignItems="flex-start">
-                      <IconButton
-                        variant="ghost"
-                        size="lg"
-                        isRound={true}
-                        _hover={{ bg: '#0D74FF' }}
-                        icon={<BsApple size="20px" />}
-                      />
-                      <IconButton
-                        variant="ghost"
-                        size="lg"
-                        isRound={true}
-                        _hover={{ bg: '#0D74FF' }}
-                        icon={<BsGoogle size="20px" />}
-                      />
-                      <IconButton
-                        variant="ghost"
-                        size="lg"
-                        isRound={true}
-                        _hover={{ bg: '#0D74FF' }}
-                        icon={<MdFacebook size="20px" />}
-                      />
-                    </HStack>
-                    </Flex>
-                  </Box>
           </Box>
         </Stack>
       </Flex>

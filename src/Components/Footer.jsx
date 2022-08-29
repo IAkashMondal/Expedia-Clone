@@ -15,8 +15,8 @@ import { ExploreApi,HelpApi,PolicyApi,CompanyApi } from '../Api/Api';
       <Box
         bg={useColorModeValue('gray.50', 'gray.900')}
         color={useColorModeValue('gray.700', 'gray.200')}>
-        <Container as={Stack} maxW={'6xl'} py={10}>
-          <SimpleGrid columns={{ base: 1, sm: 2, md: 5 }} spacing={8}>
+        <Container as={Stack} maxW={'6xl'} py={3}>
+          <SimpleGrid columns={{ base: 1, sm: 2, md: 2 }} spacing={8}>
           <Box>
             <Image
                   src={
@@ -25,7 +25,7 @@ import { ExploreApi,HelpApi,PolicyApi,CompanyApi } from '../Api/Api';
                   alt={"LOGO"}
                 />
             </Box>
-  
+            <SimpleGrid columns={{ base: 2, sm: 2, md: 4 }} spacing={5}>
             <Stack align={'flex-start'} fontSize={12} >
               <ListHeader>Company</ListHeader>
               {
@@ -59,6 +59,7 @@ import { ExploreApi,HelpApi,PolicyApi,CompanyApi } from '../Api/Api';
                     )
                 }
             </Stack>
+            </SimpleGrid>
           </SimpleGrid>
         </Container>
         <Box py={10}>

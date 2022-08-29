@@ -1,6 +1,11 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Navbar from '../Components/Navbar'
+import Homepage from '../Components/Homepage'
+import Login from '../Components/Log/Login'
+import Signup from '../Components/Log/Signup'
+import ProductPage from '../Components/ProductPage'
+import { Support } from '../Components/Support'
+import Error from './Error'
 
 
 const AllRoutes = () => {
@@ -8,8 +13,13 @@ const AllRoutes = () => {
     <>
    
      <Routes>
-      <Route path="/" element={<Navbar/>}/>
-      <Route path="*" element={<h1>Error 404 Page not found !!</h1>} />
+      <Route path="/" element={<Homepage/>}/>
+      <Route path="/sign-up" element={<Signup/>}/>
+      <Route path="/sign-in" element={<Login/>}/>
+      <Route path="/support" element={<Support/>}/>
+      <Route path="/product" element={<ProductPage/>}/>
+
+      <Route path="*" element={<Error/>} />
      </Routes> 
     </>
   )

@@ -1,3 +1,6 @@
+import { MdNotifications } from "react-icons/md"
+import { AiOutlineGlobal} from 'react-icons/ai';
+
 export const ExploreApi =[
     {
         titel:"India travel guide",
@@ -115,4 +118,28 @@ export const MobileNavItemApi=[
         to:"/cruises",
         icon:"RiShipFill"
     }
+]
+export const RouteApi=[
+    { id:"Ri1",
+        titel:<AiOutlineGlobal/> ,
+        text:"English",
+        to: "/",
+    },
+    {id:"Ri2",
+        titel:"Listyour property",
+        to:"/listyour-property",
+    },
+    {id:"Ri3",
+        titel:"Support",
+        to:"/support",
+    },
+    {id:"Ri4",
+        titel:"Trips",
+        to:"/trips",
+    },
+    {id:"Ri5",
+        titel:<MdNotifications/>,
+        to:"/",
+    },
+
 ]
