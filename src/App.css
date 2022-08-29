@@ -36,3 +36,6 @@
     transform: rotate(360deg);
   }
 }
+.text{
+  font-family:"Centra No2", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "sans-serif";
+}
