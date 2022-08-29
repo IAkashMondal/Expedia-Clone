@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {Box,Flex,Text,IconButton,Stack,Collapse,Icon,Link,Popover,PopoverTrigger,PopoverContent,useColorModeValue,
   useDisclosure,Image,  HStack, Button, Divider, PopoverArrow, PopoverCloseButton, PopoverHeader, PopoverBody, VStack, SimpleGrid } from '@chakra-ui/react';
 import {  VscCombine } from "react-icons/vsc";
@@ -10,6 +10,7 @@ import {ChevronDownIcon, ChevronRightIcon,} from '@chakra-ui/icons';
 import { CgProfile } from "react-icons/cg";
 import { NavLink } from 'react-router-dom';
 import { RouteApi } from '../Api/Api';
+import { Authcontext } from '../Context/AuthContext';
 
 
 
@@ -86,7 +87,7 @@ const Navbar = () => {
 
 export default Navbar
 const DesktopNav = () => {
-  const[auth,setAuth]=useState(false)
+  const {Auth}=useContext(Authcontext)
   const linkHoverColor = useColorModeValue('#3662D8');
   return (
     <Flex alignItems='center' gap='2'>
@@ -101,7 +102,7 @@ const DesktopNav = () => {
       <NavLink key={item.id} to={item.to}><Flex justify={'center'} align={"center"} gap={"3px"} _hover={{color: linkHoverColor,
       }}>{item.titel}{item.text}</Flex></NavLink>)}
       {
-        auth? <Signupsucess/>: <Singupfailed/>
+        Auth? <Signupsucess/>:  <Singupfailed/>
       }
       
       </HStack>
@@ -254,8 +255,38 @@ const Singupfailed =()=>{
   
 }
 const Signupsucess =()=>{
+  const {Auth,handelLogin,handellogOut}=useContext(Authcontext)
   return(
-    <h1>login</h1>
+     <>
+
+<Popover >
+  <PopoverTrigger>
+    <Button variant={"ghost"} _hover={{bg:useColorModeValue("none"),color:useColorModeValue("#3662D8")}}>ColdFire</Button>
+  </PopoverTrigger>
+  <PopoverContent >
+    <PopoverArrow />
+    <PopoverCloseButton />
+    <Box  textAlign={"left"} padding={"5px"}>
+    <PopoverHeader lineHeight={10}> You could be getting lower prices</PopoverHeader>
+    <PopoverBody >
+    <Text fontSize={"sm"} noOfLines={2}  width={'110%'}>Save 10% or more on thousands of properties with member prices.</Text>
+    <VStack gap={3} padding={5}   >
+    <VStack  
+    rounded={'md'}
+     >
+                <NavLink to="/"><Button _hover={{ bg: useColorModeValue('blue.200', 'gray.900') }} onClick={handellogOut} >Sign Out</Button></NavLink>
+                </VStack>
+                <NavLink to="*"><Text _hover={{ color: useColorModeValue('#007aff')}} >List of your favorites</Text></NavLink>
+                <NavLink to="*"><Text _hover={{ color: useColorModeValue('#007aff')}}>Expedia Reward</Text></NavLink>
+                <Divider/>
+                <NavLink to="*"><Text _hover={{ color: useColorModeValue('#007aff')}}>Feedback</Text></NavLink>
+    </VStack>
+    </PopoverBody>
+    </Box>
+    
+  </PopoverContent>
+</Popover>
+        </>
   )
 }
 

@@ -29,7 +29,13 @@ import { ArrowBackIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
   
   export const Support=() =>{
-    const[msg,seTmsg]=useState("")
+  
+    let [consoleValue ,setConsoleValue ] = useState("");   
+    const [todo,setTodo]=useState([]) ;     
+    const inputValue = (e) => {               
+
+        setConsoleValue(e.target.value) ;     
+    }
     return (
       <Container bg="#9DC4FB" maxW="full" mt={0} centerContent overflow="hidden" >
         <Flex>
@@ -60,7 +66,7 @@ import { useState } from 'react';
                           color="#DCE2FF"
                           _hover={{ border: '2px solid #1C6FEB' }}
                           leftIcon={<MdPhone color="#1970F1" size="20px" />}>
-                          +91-988888888
+                          +91-988xxxx889
                         </Button>
                         <Button
                           size="md"
@@ -119,20 +125,30 @@ import { useState } from 'react';
                         </FormControl>
                         <FormControl id="name">
                           <FormLabel>Message</FormLabel>
-                          <Textarea
+                          <Textarea 
                             borderColor="gray.300"
                             _hover={{
                               borderRadius: 'gray.300',
                             }}
                             placeholder="message"
-                          />
+                          /><Input value={consoleValue} onChange={inputValue}></Input>
                         </FormControl>
                         <FormControl id="name" float="right">
-                          <Button
+                          <Button    
                             variant="solid"
                             bg="#0D74FF"
                             color="white"
-                            _hover={{}}>
+                            _hover={{}}             onClick={() => {
+                                setTodo([
+                                    ...todo,
+                                    {id: Date.now(),
+                                     value: consoleValue ,
+                                     isCompleted : false
+                                    }
+                                ])
+                                setConsoleValue("")
+                            alert("Your Sms recjved" `Token Id${Date.Now()}`+"\n"+`${todo}`)}}
+                                >
                             Send Message
                           </Button>
                         </FormControl>

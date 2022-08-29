@@ -7,10 +7,13 @@ import { FaFacebook } from 'react-icons/fa';
 
 import {  } from '@chakra-ui/icons'
 import { NavLink } from 'react-router-dom';
+import { useContext } from 'react';
+import { Authcontext } from '../../Context/AuthContext';
+
 
 export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
-
+  const {Auth,handelLogin,handellogOut} = useContext(Authcontext)
   return (
     <Box   height={{
       base: '60%', 
@@ -82,16 +85,24 @@ export default function Signup() {
             <Text fontSize='md' noOfLines={[1, 2, 3]}
       >Selecting this checkbox will keep you signed into your account on this device until you sign out. Do not select this on shared devices.</Text>
             <Stack spacing={10} pt={2}>
-              <Button
+              <Button 
                 loadingText="Submitting"
                 size="lg"
                 bg={'blue.400'}
                 color={'white'}
                 _hover={{
                   bg: 'blue.500',
+                
                 }}>
                 Continue
               </Button>
+              <Button  size="lg"
+                bg={'blue.400'}
+                color={'white'}
+                _hover={{
+                  bg: 'blue.500',
+                
+                }} onClick={handelLogin}>Login</Button>
             </Stack>
             <Stack >
               <Text align={'center'}>
