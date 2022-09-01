@@ -44,7 +44,7 @@ export default function Signup() {
               <Box>
                 <FormControl id="firstName" isRequired>
                   <FormLabel>First Name</FormLabel>
-                  <Input type="text" />
+                  <Input autoFocus type="text" />
                 </FormControl>
               </Box>
               <Box>
@@ -85,24 +85,14 @@ export default function Signup() {
             <Text fontSize='md' noOfLines={[1, 2, 3]}
       >Selecting this checkbox will keep you signed into your account on this device until you sign out. Do not select this on shared devices.</Text>
             <Stack spacing={10} pt={2}>
-              <Button 
-                loadingText="Submitting"
-                size="lg"
-                bg={'blue.400'}
-                color={'white'}
-                _hover={{
-                  bg: 'blue.500',
-                
-                }}>
-                Continue
-              </Button>
+              
               <Button  size="lg"
                 bg={'blue.400'}
                 color={'white'}
                 _hover={{
                   bg: 'blue.500',
                 
-                }} onClick={handelLogin}>Login</Button>
+                }} onClick={handelLogin}>Continut</Button>
             </Stack>
             <Stack >
               <Text align={'center'}>
