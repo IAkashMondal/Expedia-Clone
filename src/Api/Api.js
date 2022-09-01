@@ -135,7 +135,7 @@ export const RouteApi=[
     },
     {id:"Ri4",
         titel:"Trips",
-        to:"/trips",
+        to:"/sign-in",
     },
     {id:"Ri5",
         titel:<MdNotifications/>,

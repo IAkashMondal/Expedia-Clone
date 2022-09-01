@@ -261,7 +261,7 @@ const Signupsucess =()=>{
 
 <Popover >
   <PopoverTrigger>
-    <Button variant={"ghost"} _hover={{bg:useColorModeValue("none"),color:useColorModeValue("#3662D8")}}>ColdFire</Button>
+    <Button variant={"ghost"} _hover={{bg:useColorModeValue("none"),color:useColorModeValue("#3662D8")}}>Akash Mondal</Button>
   </PopoverTrigger>
   <PopoverContent >
     <PopoverArrow />
