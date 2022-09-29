@@ -92,15 +92,16 @@ export default function ProductPage({ children }) {
 }
 
 
-const SidebarContent = ({ data,onClose, ...rest }) => {
+const SidebarContent = ({ onClose,data,rest }) => {
     let [x,setX]=React.useState(0)
     let[newarr,setNewarr]=useState([])
     let  handlesortstar=(val)=>{
         setX(val)
         let newarr=data.filter((el)=>(el.ratings>val))
+        console.log(data,"datsss")
          setNewarr(newarr)
       }
-      console.log(data,"datsss")
+      
   return (
     <Box
       bg={useColorModeValue('white', 'gray.900')}
@@ -125,7 +126,7 @@ const SidebarContent = ({ data,onClose, ...rest }) => {
             <VStack display={'flex'} align={"flex-start"}>
             <Checkbox >5 star</Checkbox>
             <Checkbox ><>4 star</></Checkbox>
-            <Button onClick={()=>handlesortstar()} >3 star</Button>
+            <Button onClick={()=>handlesortstar(3)} >3 star</Button>
             <Checkbox onClick={()=>handlesortstar(2)} > 2 star</Checkbox>
             <Checkbox  onClick={()=>handlesortstar(1)} >1 star</Checkbox>
             </VStack>
@@ -209,7 +210,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
 const DisplayData=()=> {
     const navigate=useNavigate();
     const handelBook=()=>{
-        alert("Hottle Booked Sucessfull"+"\n"+ `Oder Toekn :${Date.now()}`);
+        alert("Hottle Booked Sucessfull" + "\n"  `Oder Toekn :${Date.now()}`);
         navigate("/")
     }
 const[data,setData]=useState([])
@@ -218,6 +219,7 @@ fetch(`http://localhost:8080/Hotels`)
 .then((res)=> res.json())
 .then((res)=>setData(res))
 },[data])
+
     return (
         <>
         {
